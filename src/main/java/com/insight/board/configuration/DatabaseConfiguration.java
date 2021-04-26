@@ -2,12 +2,15 @@ package com.insight.board.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
 
 import javax.sql.DataSource;
 
@@ -19,8 +22,11 @@ import javax.sql.DataSource;
 @PropertySource("classpath:/application.properties")
 public class DatabaseConfiguration {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+
+    public DatabaseConfiguration(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     /*
       application.properties에 spring.datasource.hikari로 prifix를 정해놓아서
@@ -41,5 +47,26 @@ public class DatabaseConfiguration {
         return dataSource;
     }
 
+    @Bean
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource)throws Exception{
+        //spring-mybatis에서는 SqlsessionFactory를 생성하기 위해 SqlSessionFactoryBean을 사용한다.
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource);
+        //마이바티스 매버 파일의 위치 설정
+        //classpath = resources 폴더를 의미
+        //mapper/**/ = mapper폴더 밑의 모든폴더
+        //sql-*.xml = 이름이sql-로 시작하고 확장자가 xml인 모든파일
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/sql-*.xml"));
+
+        return sqlSessionFactoryBean.getObject();
+    }
+
+    /*
+      template를 빈으로 등록하고 추후에 연결하는 부분에서 사용할 것
+     */
+    @Bean
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
+        return new SqlSessionTemplate(sqlSessionFactory);
+    }
 
 }
