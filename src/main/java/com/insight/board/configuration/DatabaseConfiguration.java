@@ -38,6 +38,15 @@ public class DatabaseConfiguration {
     }
 
     /*
+     properties 파일에 설정해준 mapUnderscoreToCamelCase을 이용하여 빈생성
+     */
+    @Bean
+    @ConfigurationProperties(prefix = "mybatis.configuration")
+    public org.apache.ibatis.session.Configuration mybatisConfig(){
+        return new org.apache.ibatis.session.Configuration();
+    }
+
+    /*
     앞에서 만든 히카리CP 설정 파일을 이용해 DB와 연결하는 dataSource 생성
      */
     @Bean
@@ -57,7 +66,7 @@ public class DatabaseConfiguration {
         //mapper/**/ = mapper폴더 밑의 모든폴더
         //sql-*.xml = 이름이sql-로 시작하고 확장자가 xml인 모든파일
         sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:/mapper/**/sql-*.xml"));
-
+        sqlSessionFactoryBean.setConfiguration(mybatisConfig()); //위에 선언해준 mybatisConfig 를 셋팅해준다.
         return sqlSessionFactoryBean.getObject();
     }
 
