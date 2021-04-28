@@ -16,3 +16,4 @@
         ORDER BY board_idx DESC
         ]]>
 	</select>
+</mapper>
