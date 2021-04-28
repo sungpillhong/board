@@ -13,8 +13,8 @@ public class BoardDto {
     private String contents;
     private int hitCnt;
     private String creatorId;
-    private Date createdDatetime;
+    private String createdDatetime;
     private String updaterId;
-    private Date updatedDatetime;
+    private String updatedDatetime;
     //t_board 테이블컬럼과 매칭되는 변수
 }
