@@ -9,7 +9,6 @@ public class BoardApplication {
     public static void main(String[] args) {
         SpringApplication.run(BoardApplication.class, args);
     }
-
 }
 //    t_board 테이블 생성 쿼리
 //    create table t_board(
