@@ -55,7 +55,7 @@ public class DatabaseConfiguration {
         System.out.println("Datasource conntection:"+dataSource.toString());
         return dataSource;
     }
-    //제발 자동빌드
+
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource)throws Exception{
         //spring-mybatis에서는 SqlsessionFactory를 생성하기 위해 SqlSessionFactoryBean을 사용한다.
