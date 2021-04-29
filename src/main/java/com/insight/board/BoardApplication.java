@@ -9,9 +9,7 @@ public class BoardApplication {
     public static void main(String[] args) {
         SpringApplication.run(BoardApplication.class, args);
     }
-
 }
-// 젠킨슨 테스트용 주석
 //    t_board 테이블 생성 쿼리
 //    create table t_board(
 //        board_idx INT(11) NOT NULL auto_increment COMMENT '글 번호',
