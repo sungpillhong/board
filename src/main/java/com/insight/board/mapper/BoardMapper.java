@@ -9,4 +9,6 @@ import java.util.List;
 public interface BoardMapper {
 
     List<BoardDto> selectBoardList() throws Exception;
+
+    void insertBoard(BoardDto boardDto);
 }

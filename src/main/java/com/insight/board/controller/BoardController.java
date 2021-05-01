@@ -31,4 +31,24 @@ public class BoardController {
 
         return mv;
     }
+
+    //게시글작성 폼
+    @RequestMapping("/board/openBoardWrite.do")
+    public ModelAndView openBoardWrite() throws Exception{
+        ModelAndView mv = new ModelAndView("/board/boardWrite");
+        return mv;
+    }
+
+    /*
+     <form>의 action 속성에 지정된 insertBoard.do를 확인할 수 있다.
+     */
+    @RequestMapping("/board/insertBoard.do")
+    public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
+        String url = "/board/openBoardList.do";
+        boardService.insertBoard(boardDto);
+        /*
+         글작성후 openBoardList.do로 리다이렉션
+         */
+        return new ModelAndView("redirect:"+ url);
+    }
 }
