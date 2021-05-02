@@ -49,5 +49,36 @@
 		<a href="#this" id="delete" class="btn">삭제하기</a>
 	</div>
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#list").on("click", function(){
+				location.href = "/board/openBoardList.do";
+			});
+
+			$("#edit").on("click", function(){
+				var result = confirm("수정하시겠습니까?");
+				if(result){
+					var frm = $("#frm")[0];
+					frm.action = "/board/updateBoard.do";
+					frm.submit();
+				}else{
+					location.reload();
+				}
+
+			});
+
+			$("#delete").on("click", function(){
+				var result = confirm("삭제하시겠습니까?");
+				if(result){
+				var frm = $("#frm")[0];
+				frm.action = "/board/deleteBoard.do";
+				frm.submit();
+				}else{
+					location.reload();
+				}
+			});
+		});
+	</script>
 </body>
 </html>
