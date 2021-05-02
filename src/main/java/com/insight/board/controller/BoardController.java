@@ -26,7 +26,6 @@ public class BoardController {
     public ModelAndView openBoardList() throws Exception{
         //templates 폴더 아래에 있는 board/boardList.html을 의미한다.
         ModelAndView mv = new ModelAndView("/board/boardList");
-        log.debug("openBoardList");
         List<BoardDto> list = boardService.selectBoardList();
         //list라는 이름으로 뷰에서 사용할 수 있다.
         mv.addObject("list",list);
