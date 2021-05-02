@@ -51,4 +51,14 @@ public class BoardController {
          */
         return new ModelAndView("redirect:"+ url);
     }
+
+    @RequestMapping("/board/openBoardDetail.do")
+    public ModelAndView openBoardDetail(int boardIdx)throws Exception{
+        ModelAndView mv = new ModelAndView("/board/boardDetail");
+
+        BoardDto board = boardService.selectBoardDetail(boardIdx);
+        mv.addObject("board",board);
+
+        return mv;
+    }
 }
