@@ -46,7 +46,7 @@ public class BoardController {
     @RequestMapping("/board/insertBoard.do")
     public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
         ModelAndView mv = new ModelAndView();
-        mv.setView(new RedirectView("board/openBoardList.do",true));
+        mv.setViewName("redirect:/board/openBoardList.do");
         boardService.insertBoard(boardDto);
         /*
          글작성후 openBoardList.do로 리다이렉션
