@@ -44,7 +44,7 @@ public class BoardController {
      */
     @RequestMapping("/board/insertBoard.do")
     public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
-        String url = "/openBoardList.do";
+        String url = "board/openBoardList.do";
         boardService.insertBoard(boardDto);
         /*
          글작성후 openBoardList.do로 리다이렉션
@@ -64,7 +64,7 @@ public class BoardController {
 
     @RequestMapping("/board/updateBoard.do")
     public ModelAndView updateBoard(BoardDto board) throws Exception{
-        String url = "/openBoardList.do";
+        String url = "board/openBoardList.do";
 
         boardService.updateBoard(board);
 
