@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -44,12 +45,13 @@ public class BoardController {
      */
     @RequestMapping("/board/insertBoard.do")
     public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
-        String url = "board/openBoardList.do";
+        ModelAndView mv = new ModelAndView();
+        mv.setView(new RedirectView("board/openBoardList.do",true));
         boardService.insertBoard(boardDto);
         /*
          글작성후 openBoardList.do로 리다이렉션
          */
-        return new ModelAndView("redirect:"+ url);
+        return mv;
     }
 
     @RequestMapping("/board/openBoardDetail.do")
