@@ -66,20 +66,22 @@ public class BoardController {
 
     @RequestMapping("/board/updateBoard.do")
     public ModelAndView updateBoard(BoardDto board) throws Exception{
-        String url = "board/openBoardList.do";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/board/openBoardList.do");
 
         boardService.updateBoard(board);
 
-        return new ModelAndView("redirect:"+url);
+        return mv;
 
     }
 
     @RequestMapping("/board/deleteBoard.do")
     public ModelAndView deleteBoard(int boardIdx) throws Exception{
-        String url ="board/openBoardList.do";
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/board/openBoardList.do");
 
         boardService.deleteBoard(boardIdx);
 
-        return new ModelAndView("redirect:"+url);
+        return mv;
     }
 }
