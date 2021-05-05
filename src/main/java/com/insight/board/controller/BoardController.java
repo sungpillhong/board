@@ -23,7 +23,7 @@ public class BoardController {
     @RequestMapping("/board/openBoardList.do")
     public ModelAndView openBoardList() throws Exception{
         //templates 폴더 아래에 있는 board/boardList.html을 의미한다.
-        ModelAndView mv = new ModelAndView("/board/boardList");
+        ModelAndView mv = new ModelAndView("board/boardList");
 
         List<BoardDto> list = boardService.selectBoardList();
         //list라는 이름으로 뷰에서 사용할 수 있다.
@@ -35,7 +35,7 @@ public class BoardController {
     //게시글작성 폼
     @RequestMapping("/board/openBoardWrite.do")
     public ModelAndView openBoardWrite() throws Exception{
-        ModelAndView mv = new ModelAndView("/board/boardWrite");
+        ModelAndView mv = new ModelAndView("board/boardWrite");
         return mv;
     }
 
@@ -44,7 +44,7 @@ public class BoardController {
      */
     @RequestMapping("/board/insertBoard.do")
     public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
-        String url = "/board/openBoardList.do";
+        String url = "board/openBoardList.do";
         boardService.insertBoard(boardDto);
         /*
          글작성후 openBoardList.do로 리다이렉션
@@ -54,7 +54,7 @@ public class BoardController {
 
     @RequestMapping("/board/openBoardDetail.do")
     public ModelAndView openBoardDetail(int boardIdx)throws Exception{
-        ModelAndView mv = new ModelAndView("/board/boardDetail");
+        ModelAndView mv = new ModelAndView("board/boardDetail");
 
         BoardDto board = boardService.selectBoardDetail(boardIdx);
         mv.addObject("board",board);
@@ -64,7 +64,7 @@ public class BoardController {
 
     @RequestMapping("/board/updateBoard.do")
     public ModelAndView updateBoard(BoardDto board) throws Exception{
-        String url = "/board/openBoardList.do";
+        String url = "board/openBoardList.do";
 
         boardService.updateBoard(board);
 
@@ -74,7 +74,7 @@ public class BoardController {
 
     @RequestMapping("/board/deleteBoard.do")
     public ModelAndView deleteBoard(int boardIdx) throws Exception{
-        String url ="/board/openBoardList.do";
+        String url ="board/openBoardList.do";
 
         boardService.deleteBoard(boardIdx);
 
