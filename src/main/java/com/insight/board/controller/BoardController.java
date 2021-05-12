@@ -107,8 +107,8 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/board/write", method = RequestMethod.POST)
-    public String insertBoard(BoardDto boardDto, MultipartHttpServletRequest multipartHttpServletRequest)throws Exception{
-        boardService.insertBoard(boardDto,multipartHttpServletRequest);
+    public String insertBoard(BoardDto boardDto)throws Exception{
+        boardService.insertBoard(boardDto);
         return "redirect:/board";
     }
 
@@ -125,6 +125,11 @@ public class BoardController {
         return mv;
     }
 
+    /*
+    https://imbf.github.io/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html
+    HTML은 Post와 Get 방식의 요청만 지원하지만 스프링은 웹 브라우저에서 사용되는 Post,Get 방식을
+    이용하여 Put과 Delete 방식을 사용할 수 있는 기능을 지원하는데 HiddenHttpMethodFilter가 그것이다. 위의 블로그에 잘 정리되어있다.
+     */
     @RequestMapping(value = "/board/{boardIdx}", method = RequestMethod.PUT)
     public String updateBoard(BoardDto boardDto)throws Exception{
         boardService.updateBoard(boardDto);
