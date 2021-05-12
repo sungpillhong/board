@@ -3,6 +3,7 @@ package com.insight.board.controller;
 import com.insight.board.dto.BoardDto;
 import com.insight.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -91,7 +92,7 @@ public class BoardController {
       RestAPI로 변경
       value 속성으로 주소를 지정하고 method 속성으로 요청 방식을 정의
      */
-    @RequestMapping(value = "/board", method = RequestMethod.GET)
+    @RequestMapping(value = "board", method = RequestMethod.GET)
     public ModelAndView openBoardList() throws Exception{
         ModelAndView mv = new ModelAndView("board/restBoardList");
 
@@ -101,21 +102,24 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value = "/board/write", method = RequestMethod.GET)
-    public String openBoardWrite() throws Exception{
-        return "/board/restBoardWrite";
+    @RequestMapping(value = "board/write", method = RequestMethod.GET)
+    public ModelAndView openBoardWrite() throws Exception{
+        ModelAndView mv = new ModelAndView("board/restBoardWrite");
+        return mv;
     }
 
-    @RequestMapping(value = "/board/write", method = RequestMethod.POST)
-    public String insertBoard(BoardDto boardDto)throws Exception{
+    @RequestMapping(value = "board/write", method = RequestMethod.POST)
+    public ModelAndView insertBoard(BoardDto boardDto)throws Exception{
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/board");
         boardService.insertBoard(boardDto);
-        return "redirect:/board";
+        return mv;
     }
 
     /*
      @PathVariable = 메서드의 파라미터가 URI의 변수로 사용되는 것을 의미한다.
      */
-    @RequestMapping(value = "/board/{boardIdx}",method = RequestMethod.GET)
+    @RequestMapping(value = "board/{boardIdx}",method = RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardIdx") int boardIdx)throws Exception{
         ModelAndView mv = new ModelAndView("board/restBoardDetail");
 
@@ -129,17 +133,24 @@ public class BoardController {
     https://imbf.github.io/spring/2020/05/03/Spring-HiddenHttpMethodFilter.html
     HTML은 Post와 Get 방식의 요청만 지원하지만 스프링은 웹 브라우저에서 사용되는 Post,Get 방식을
     이용하여 Put과 Delete 방식을 사용할 수 있는 기능을 지원하는데 HiddenHttpMethodFilter가 그것이다. 위의 블로그에 잘 정리되어있다.
+
      */
-    @RequestMapping(value = "/board/{boardIdx}", method = RequestMethod.PUT)
-    public String updateBoard(BoardDto boardDto)throws Exception{
+    @RequestMapping(value = "board/{boardIdx}", method = RequestMethod.PUT)
+    public ModelAndView updateBoard(BoardDto boardDto)throws Exception{
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/board");
+
         boardService.updateBoard(boardDto);
-        return "redirect:/board";
+        return mv;
     }
 
-    @RequestMapping(value = "/board/{boardIdx}", method = RequestMethod.DELETE)
-    public String deleteBoard(@PathVariable("boardIdx") int boardIdx)throws Exception{
+    @RequestMapping(value = "board/{boardIdx}", method = RequestMethod.DELETE)
+    public ModelAndView deleteBoard(@PathVariable("boardIdx") int boardIdx)throws Exception{
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("redirect:/board");
+
         boardService.deleteBoard(boardIdx);
-        return "redirect:/board";
+        return mv;
     }
 
 }

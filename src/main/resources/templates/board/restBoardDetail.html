@@ -54,12 +54,13 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#list").on("click", function(){
-				location.href = "/board/openBoardList.do";
+				location.href = "/board";
 			});
 
 			$("#edit").on("click", function(){
 				var result = confirm("수정하시겠습니까?");
 				if(result){
+					var boardIdx = $("input[name=boardIdx]").value();
 					$("#method").val("put");
 					var frm = $("#frm")[0];
 					frm.action = "/board/"+boardIdx;
