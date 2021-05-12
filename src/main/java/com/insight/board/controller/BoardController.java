@@ -93,7 +93,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/board", method = RequestMethod.GET)
     public ModelAndView openBoardList() throws Exception{
-        ModelAndView mv = new ModelAndView("/board/restBoardList");
+        ModelAndView mv = new ModelAndView("board/restBoardList");
 
         List<BoardDto> list = boardService.selectBoardList();
         mv.addObject("list",list);
@@ -117,7 +117,7 @@ public class BoardController {
      */
     @RequestMapping(value = "/board/{boardIdx}",method = RequestMethod.GET)
     public ModelAndView openBoardDetail(@PathVariable("boardIdx") int boardIdx)throws Exception{
-        ModelAndView mv = new ModelAndView("/board/restBoardDetail");
+        ModelAndView mv = new ModelAndView("board/restBoardDetail");
 
         BoardDto boardDto = boardService.selectBoardDetail(boardIdx);
         mv.addObject("board",boardDto);
