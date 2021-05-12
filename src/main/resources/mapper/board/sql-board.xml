@@ -34,7 +34,7 @@
 			#{contents},
 			NOW(),
 			'admin',
-			0,
+			NOW(),
 		 	'admin'
 		)
 		]]>
