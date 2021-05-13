@@ -3,7 +3,6 @@ package com.insight.board.controller;
 import com.insight.board.dto.BoardDto;
 import com.insight.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -135,7 +134,7 @@ public class BoardController {
     이용하여 Put과 Delete 방식을 사용할 수 있는 기능을 지원하는데 HiddenHttpMethodFilter가 그것이다. 위의 블로그에 잘 정리되어있다.
 
      */
-    @RequestMapping(value = "board/{boardIdx}", method = RequestMethod.PUT)
+    @RequestMapping(value = "board/{boardIdx}", method = RequestMethod.POST)
     public ModelAndView updateBoard(BoardDto boardDto)throws Exception{
         ModelAndView mv = new ModelAndView();
         mv.setViewName("redirect:/board");
@@ -144,7 +143,7 @@ public class BoardController {
         return mv;
     }
 
-    @RequestMapping(value = "board/{boardIdx}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "boardDel/{boardIdx}", method = RequestMethod.POST)
     public ModelAndView deleteBoard(@PathVariable("boardIdx") int boardIdx)throws Exception{
         ModelAndView mv = new ModelAndView();
         mv.setViewName("redirect:/board");
