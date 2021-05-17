@@ -13,6 +13,7 @@ import org.springframework.context.annotation.PropertySource;
 
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /*
   application.properties를 사용할 수 있게 설정 파일의 위치를 지정
@@ -76,6 +77,11 @@ public class DatabaseConfiguration {
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory){
         return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    @ConfigurationProperties(prefix = "spring.jpa")
+    public Properties hibernateConfig(){
+        return new Properties();
     }
 
 }
