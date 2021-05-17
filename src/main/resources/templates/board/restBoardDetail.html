@@ -42,7 +42,6 @@
 				</tbody>
 			</table>
 			<input type="hidden" id="boardIdx" name="boardIdx" th:value="${board.boardIdx }">
-			<input type="hidden" id="method" name="_method"/>
 		</form>
 		
 		<a href="#this" id="list" class="btn">목록으로</a>
@@ -54,15 +53,14 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#list").on("click", function(){
-				location.href = "/board/openBoardList.do";
+				location.href = "/board";
 			});
 
 			$("#edit").on("click", function(){
 				var result = confirm("수정하시겠습니까?");
 				if(result){
-					$("#method").val("put");
 					var frm = $("#frm")[0];
-					frm.action = "/board/"+boardIdx;
+					frm.action = "/board/"+$("#boardIdx").val();
 					frm.submit();
 				}else{
 					location.reload();
@@ -73,10 +71,9 @@
 			$("#delete").on("click", function(){
 				var result = confirm("삭제하시겠습니까?");
 				if(result){
-				$("method").val("delete");
-				var frm = $("#frm")[0];
-				frm.action = "/board/"+boardIdx;
-				frm.submit();
+					var frm = $("#frm")[0];
+					frm.action = "/boardDel/"+ $("#boardIdx").val();
+					frm.submit();
 				}else{
 					location.reload();
 				}
