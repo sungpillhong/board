@@ -35,9 +35,9 @@ public class BoardEntity {
     @Column(nullable = false)
     private LocalDateTime createdDatetime = LocalDateTime.now();
 
-    private String updaterId;
+    private String updaterId = "admin";
 
-    private LocalDateTime updatedDatetime;
+    private LocalDateTime updatedDatetime = LocalDateTime.now();
 
 
 }
