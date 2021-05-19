@@ -2,7 +2,9 @@ package com.insight.board.controller;
 
 import com.insight.board.dto.BoardDto;
 import com.insight.board.service.BoardService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,16 +17,17 @@ public class RestApiBoardController {
     @Autowired
     private BoardService boardService;
 
-
     /*
       RestAPI로 변경
       value 속성으로 주소를 지정하고 method 속성으로 요청 방식을 정의
      */
+    @ApiOperation(value = "게시글 목록조회")
     @RequestMapping(value = "/api/board", method = RequestMethod.GET)
     public List<BoardDto> openBoardList() throws Exception{
         return boardService.selectBoardList();
     }
 
+    @ApiOperation(value = "게시글 작성")
     @RequestMapping(value = "/api/board/write", method = RequestMethod.POST)
     public void insertBoard(@RequestBody BoardDto boardDto) throws Exception{
         boardService.insertBoard(boardDto);
@@ -34,8 +37,8 @@ public class RestApiBoardController {
      @PathVariable = 메서드의 파라미터가 URI의 변수로 사용되는 것을 의미한다.
      */
     @RequestMapping(value = "/api/board/{boardIdx}",method = RequestMethod.GET)
-    @ApiOperation(value = "게시글 상세조회", response = BoardDto.class)
-    public BoardDto openBoardDetail(@PathVariable("boardIdx") int boardIdx)throws Exception{
+    @ApiOperation(value = "게시글 상세조회")
+    public BoardDto openBoardDetail(@PathVariable("boardIdx") @ApiParam(value = "게시글번호") int boardIdx)throws Exception{
         return boardService.selectBoardDetail(boardIdx);
     }
 
