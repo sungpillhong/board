@@ -2,6 +2,7 @@ package com.insight.board.controller;
 
 import com.insight.board.dto.BoardDto;
 import com.insight.board.service.BoardService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -119,6 +120,7 @@ public class BoardController {
      @PathVariable = 메서드의 파라미터가 URI의 변수로 사용되는 것을 의미한다.
      */
     @RequestMapping(value = "board/{boardIdx}",method = RequestMethod.GET)
+    @ApiOperation(value = "게시글 상세조회", response = BoardDto.class)
     public ModelAndView openBoardDetail(@PathVariable("boardIdx") int boardIdx)throws Exception{
         ModelAndView mv = new ModelAndView("board/restBoardDetail");
 
