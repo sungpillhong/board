@@ -6,3 +6,5 @@
 api, restfulapi
 
 jpa, mybatis
+
+swagger
