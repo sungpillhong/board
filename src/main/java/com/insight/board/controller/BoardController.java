@@ -3,7 +3,9 @@ package com.insight.board.controller;
 import com.insight.board.dto.BoardDto;
 import com.insight.board.service.BoardService;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @RestController
+@PropertySource("classpath:application.properties")
+@Log4j2
 public class BoardController {
 
     @Autowired

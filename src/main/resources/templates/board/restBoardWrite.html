@@ -4,11 +4,47 @@
 	<meta charset="UTF-8">
 	<title>board</title>
 	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<!-- Google reCAPTCHA js -->
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
+	<script type="text/javascript">
+	$(function() {
+
+		$('#save').click(function() {
+					var captcha = 1;
+					$.ajax({
+						url: 'google/VerifyRecaptcha',
+						type: 'post',
+						data: {
+							recaptcha: $("#g-recaptcha-response").val()
+						},
+						success: function(data) {
+							if(data == 0) {
+								alert("자동 가입 방지 봇 통과");
+								$('#frm').submit();
+							}else if(data == 1){
+								alert("자동 가입 방지 봇을 확인 한뒤 진행 해 주세요.");
+								return;
+							}else{
+								alert("자동 가입 방지 봇을 실행 하던 중 오류가 발생 했습니다.");
+								return;
+							}
+						},
+          				error: function(xhr,status,error){
+            				console.log(error);
+            			}
+					});
+					if(captcha != 0) {
+						return false;
+					}
+			});
+	});
+	</script>
 </head>
 <body>
 	<div class="container">
 	    <h2>게시글 등록</h2>
-	    <form id="frm" name="frm" method="post" action="/board/write">
+	    <form id="frm" name="frm" method="post" action="/board/write" >
 	    	<table class="board_detail">
 	    		<tr>
 	    			<td>제목</td>
@@ -20,7 +56,8 @@
 	    			</td>
 	    		</tr>
 	    	</table>
-	    	<input type="submit" id="submit" value="저장" class="btn">
+			<div class="g-recaptcha" data-sitekey="6LfF5ashAAAAABvEvNyuVxXeNDxDjGsSM04Iomm-"></div>
+			<input type="button" id="save" value="저장" class="btn">
 	    </form>
     </div>
 </body>
